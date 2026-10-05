@@ -87,7 +87,7 @@ st.html("""
         font-size: 0.85rem;
     }
 </style>
-""", unsafe_allow_html=True)
+""")
 
 # Initialize Session State
 if "messages" not in st.session_state:
