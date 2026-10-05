@@ -18,6 +18,15 @@ import dotenv
 
 dotenv.load_dotenv()
 
+# Bridge Streamlit Cloud Secrets into os.environ
+try:
+    if hasattr(st, "secrets"):
+        for key in ["GEMINI_API_KEY", "GEMINI_MODEL", "ANTHROPIC_API_KEY"]:
+            if key in st.secrets and key not in os.environ:
+                os.environ[key] = str(st.secrets[key])
+except Exception:
+    pass
+
 from document_store import DocumentStore
 from agent import answer_question
 
@@ -98,6 +107,20 @@ with st.sidebar:
     st.title("⚖️ Document Agent")
     st.caption("Budgeted Tool Calling • Hard 6-Call Limit • Zero-RAG")
     st.divider()
+
+    # API Key Configuration Fallback
+    if not os.environ.get("GEMINI_API_KEY"):
+        st.warning("⚠️ GEMINI_API_KEY is missing")
+        key_input = st.text_input(
+            "Enter Gemini API Key",
+            type="password",
+            help="Add GEMINI_API_KEY in Streamlit Cloud Secrets or paste it here."
+        )
+        if key_input:
+            os.environ["GEMINI_API_KEY"] = key_input.strip()
+            st.success("API Key saved!")
+            st.rerun()
+        st.divider()
 
     uploaded_file = st.file_uploader("Upload Document (PDF)", type=["pdf"], key="pdf_uploader")
 
