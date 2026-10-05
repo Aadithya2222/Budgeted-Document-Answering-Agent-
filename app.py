@@ -39,7 +39,7 @@ st.set_page_config(
 )
 
 # Custom CSS for rich aesthetics and badges
-st.markdown("""
+st.html("""
 <style>
     .badge-answered {
         background: linear-gradient(135deg, #10b981 0%, #059669 100%);
