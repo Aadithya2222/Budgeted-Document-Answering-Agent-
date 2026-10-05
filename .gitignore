@@ -1,0 +1,39 @@
+# Environment variables and secrets
+.env
+*.env
+.env.*
+!.env.example
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pytest_cache/
+.pytest_cache/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs & temporary files
+logs/*.jsonl
+logs/*.log
+*.log
+scratch/
+
+# Large third-party textbooks (>10MB)
+samples/MachineLearningTomMitchell.pdf
+samples/*Artificial Intelligence*
+samples/*Introduction to Machine Learning*
+samples/1791185899949.pdf
